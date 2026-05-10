@@ -1,4 +1,6 @@
-FROM node:20
+FROM node:20-bookworm
+
+RUN apt-get update && apt-get install -y ffmpeg fonts-dejavu-core && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
