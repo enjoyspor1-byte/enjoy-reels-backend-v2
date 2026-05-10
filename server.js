@@ -4,8 +4,8 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const { execFile } = require("child_process");
-const ffmpegPath = require("ffmpeg-static");
 
+const ffmpegPath = "ffmpeg";
 const app = express();
 
 app.use(cors());
