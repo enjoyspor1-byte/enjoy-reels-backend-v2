@@ -187,7 +187,7 @@ app.post("/render", upload.array("videos", 20), async (req, res) => {
   try {
     const perClip = clipLength(duration, files.length, cut);
 
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < Math.min(files.length, 2); i++) {
       const file = files[i];
       const originalPath = file.path;
       const videoDuration = await getDuration(originalPath);
