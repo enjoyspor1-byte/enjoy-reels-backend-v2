@@ -236,9 +236,9 @@ app.post("/render", upload.array("videos", 20), async (req, res) => {
 
   } catch (err) {
     res.status(500).json({
-      error: "Render hatası",
-      detail: err.message
-    });
+  error: err.message,
+  detail: err.stack
+});
   }
 });
 
