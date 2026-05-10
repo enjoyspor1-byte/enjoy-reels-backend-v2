@@ -1,6 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
 
 const app = express();
 
@@ -9,6 +11,12 @@ app.use(cors());
 const upload = multer({
   dest: "uploads/"
 });
+
+app.use("/outputs", express.static("outputs"));
+
+if (!fs.existsSync("outputs")) {
+  fs.mkdirSync("outputs");
+}
 
 app.get("/", (req, res) => {
   res.json({
@@ -19,7 +27,6 @@ app.get("/", (req, res) => {
 
 app.post("/render", upload.array("videos", 20), async (req, res) => {
   try {
-
     const files = req.files || [];
 
     if (!files.length) {
@@ -28,18 +35,24 @@ app.post("/render", upload.array("videos", 20), async (req, res) => {
       });
     }
 
+    const firstVideo = files[0];
+    const originalPath = firstVideo.path;
+    const outputName = "enjoy-reels-" + Date.now() + path.extname(firstVideo.originalname || ".mp4");
+    const outputPath = path.join("outputs", outputName);
+
+    fs.copyFileSync(originalPath, outputPath);
+
     res.json({
       ok: true,
       uploadedVideos: files.length,
-      message: "Render sistemi hazır"
+      message: "İlk video çıktı olarak hazırlandı",
+      output: "/outputs/" + outputName
     });
 
   } catch (err) {
-
     res.status(500).json({
       error: err.message
     });
-
   }
 });
 
