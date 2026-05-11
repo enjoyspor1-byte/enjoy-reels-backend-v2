@@ -95,9 +95,9 @@ function hookY(style) {
 }
 
 function hookFont(style) {
-  if (style === "center") return 72;
-  if (style === "minimal") return 54;
-  return 62;
+  if (style === "center") return 54;
+  if (style === "minimal") return 42;
+  return 46;
 }
 
 async function createClip(inputPath, outputPath, options) {
