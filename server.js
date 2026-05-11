@@ -119,7 +119,7 @@ async function createClip(inputPath, outputPath, options) {
     "setsar=1," +
     "fps=30," +
     "drawbox=x=0:y=0:w=1080:h=1920:color=black@0.00:t=fill," +
-    "drawtext=text='Enjoy':x=54:y=54:fontsize=38:fontcolor=white:box=1:boxcolor=0xFF7A00@1:boxborderw=20," +
+    
     `drawtext=text='${text}':x=(w-text_w)/2:y=${y}:fontsize=${fontSize}:fontcolor=white:line_spacing=12:borderw=3:bordercolor=black@0.65:box=1:boxcolor=black@0.35:boxborderw=28`;
 
   await runFfmpeg([
