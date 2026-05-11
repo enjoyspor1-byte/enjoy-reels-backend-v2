@@ -117,9 +117,7 @@ async function createClip(inputPath, outputPath, options) {
     "scale=1080:1920:force_original_aspect_ratio=increase," +
     "crop=1080:1920," +
     "setsar=1," +
-    "fps=30," +
-    "drawbox=x=0:y=0:w=1080:h=1920:color=black@0.00:t=fill," +
-    
+    "fps=30";
     
 
   await runFfmpeg([
