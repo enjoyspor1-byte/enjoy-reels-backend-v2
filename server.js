@@ -189,7 +189,11 @@ app.post("/render", upload.array("videos", 20), async (req, res) => {
       const file = files[i];
       const originalPath = file.path;
       const videoDuration = await getDuration(originalPath);
-      const start = sceneStart(videoDuration, i, files.length, cut);
+      const randomOffset = Math.random() * 2;
+const start = Math.max(
+  0,
+  sceneStart(videoDuration, i, files.length, cut) + randomOffset
+);
 
       const clipPath = path.join("temp", `clip-${jobId}-${i}.mp4`);
 
