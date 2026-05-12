@@ -183,7 +183,7 @@ app.post("/render", upload.array("videos", 20), async (req, res) => {
   const scenePlan = [];
 
   try {
-    const perClip = clipLength(duration, files.length, cut);
+    const baseClip = clipLength(duration, files.length, cut);
 
     for (let i = 0; i < Math.min(files.length, 3); i++) {
       const file = files[i];
@@ -199,7 +199,7 @@ const start = Math.max(
 
       await createClip(originalPath, clipPath, {
         start,
-        duration: perClip,
+        duration: Math.max(1.1, baseClip - (i % 2) * 0.8),
         hook,
         hookStyle,
         index: i
@@ -211,7 +211,7 @@ const start = Math.max(
         video: i + 1,
         originalName: file.originalname,
         selectedStart: Math.round(start * 10) / 10,
-        selectedDuration: Math.round(perClip * 10) / 10
+        selectedDuration: Math.round(Math.max(1.1, baseClip - (i % 2) * 0.8) * 10) / 10
       });
     }
 
